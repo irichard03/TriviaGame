@@ -36,11 +36,15 @@ var triviaGame = {
        }
     },
 
-    //triviaGame constructor
+    //triviaGame constructor  fixed version (not DRY)
     TriviaGame : function(quiz,right,wrong){
         this.numQuestions = quiz;
         this.rightAnswers = right;
         this.wrongAnswers = wrong;
+        var myGame = new Game( "What is your favorite color?", "red", ["blue, Green, Purple, Orange"] );
+        console.log(myGame.allAnswers);
+        myGame.shuffle();
+        console.log(myGame.allAnswers);        
     }
     
 }
@@ -53,7 +57,7 @@ var shazBot = "shazbot";
  $(document).ready(function(){
     
     
-    
+    var newGame = new TriviaGame(3,0,0,first)
     
     
     debugMe(x);
