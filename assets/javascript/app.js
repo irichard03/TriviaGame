@@ -4,37 +4,46 @@
  * 
  */
 
-//Hey Trivia game the object.
+//Trivia game the object.
 var triviaGame = {
     numQuestions = 0,
     rightAnswers = 0,
-    wrongAnswer = 0,
+    wrongAnswers = 0,
     
-    //questions the object within trivia game
-    questions = { 
+    //game object defines the questions, answers, wrong answers, and a method-
+    // to replace a random wrong answer with the correct answer, and a constructor to create questions.
+    //mostly I just want to try out nested objects.
+    game = { 
         question = "why am I here?",
         rightAnswer = "You got someplace better to be?",
         rightNumber = 0,
-        wrongAnswers = ["Yes", "No", "True", "False"],
+        allAnswers = ["Yes", "No", "True", "False"],
         
-        Question: function(){
+        //Game CONSTRUCTOR METHOD.
+        Game: function(ask, answer, nope){
+            
             this.question = ask,
             this.rightanswer = answer,
-            this.wrongAnswers = nope
+            this.allAnswers = nope
         },
 
+        //Shuffle METHOD will get a random number from 1 to 4 and ovewrite one of the wrong answers in all answers
+        //array using the array method splice
         shuffle : function(){
-            let x = Math.floor(Math.random() * 4) + 1;
-            this.rightNumber = x;
+            
+            this.rightNumber = Math.floor(Math.random() * 4) + 1;
+            this.allAnswers.splice(x,0,this.rightAnswer);
        }
+    },
+
+    //triviaGame constructor
+    TriviaGame : function(quiz,right,wrong){
+        this.numQuestions = quiz;
+        this.rightAnswers = right;
+        this.wrongAnswers = wrong;
     }
     
 }
-//Constructor for question
-function Question(ask,answer,nope) {
-    
-//constructor for quiz
-function TriviaGame(count,right,wrong,)
 
 
 
