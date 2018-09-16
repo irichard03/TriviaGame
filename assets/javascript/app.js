@@ -19,7 +19,7 @@ $(document).ready(function(){
         }
         var controller;    
         var clock;
-        var player;
+        
 
         //Declare a game object and initialize it with default valuse.  It defines the questions, answers, and wrong answers.
         var game = { 
@@ -47,8 +47,9 @@ $(document).ready(function(){
             for(var y = 0; y <= 3; y++){
                 $( `.answer${y}` ).text(x.allAnswers[y]);
                 if(x.allAnswers[y] === x.correctAnswer){
-                
-                    $( `.answer${y}` ).click(function(y){        //code executed on right response
+                    $(`.answer${y}`).attr("hint","RIGHT");
+                    /** 
+                    $( `.answer${y}` ).click(function(){        //code executed on right response
                         stopTimer();
                         myTriviaGame.numQuestions--;
                         if(myTriviaGame.numQuestions === 0){
@@ -61,9 +62,12 @@ $(document).ready(function(){
                               },3000)
                         }                           
                     });
+                    */
                 }                
                 else{
-                    $( `.answer${y}` ).click(function(y){       //code executed on incorrect response
+                    $(`.answer${y}`).attr("hint","WRONG");
+                    /**
+                        $( `.answer${y}` ).click(function(){       //code executed on incorrect response
                         myTriviaGame.numQuestions--;
                         if(myTriviaGame.numQuestions === 0){
                             alert("Game over");
@@ -75,14 +79,14 @@ $(document).ready(function(){
                             stopTimer();                            
                         }
                     }); 
-                    
+                    */
                 }
                 $( `.answer${y}` ).mouseenter(function() {
                 $( this ).css( "color", "red" );
                 }).mouseleave(function() {
                 $( this ).css( "color", "black" );
                 });
-            }
+            }//end of loop
             startTimer();                    
         }
         
