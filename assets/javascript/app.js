@@ -45,9 +45,9 @@ $(document).ready(function(){
         function drawQuestion(x){
             $(".question").text(x.question);
             for(var y = 0; y <= 3; y++){
-                $( `.answer${y}` ).text(x.allAnswers[y]);
+                $( `#answer${y}` ).text(x.allAnswers[y]);
                 if(x.allAnswers[y] === x.correctAnswer){
-                    $(`.answer${y}`).attr("hint","RIGHT");
+                    $(`#answer${y}`).attr("hint","RIGHT");
                     /** 
                     $( `.answer${y}` ).click(function(){        //code executed on right response
                         stopTimer();
@@ -65,7 +65,7 @@ $(document).ready(function(){
                     */
                 }                
                 else{
-                    $(`.answer${y}`).attr("hint","WRONG");
+                    $(`#answer${y}`).attr("hint","WRONG");
                     /**
                         $( `.answer${y}` ).click(function(){       //code executed on incorrect response
                         myTriviaGame.numQuestions--;
@@ -81,13 +81,18 @@ $(document).ready(function(){
                     }); 
                     */
                 }
-                $( `.answer${y}` ).mouseenter(function() {
+                $( `#answer${y}` ).mouseenter(function() {
                 $( this ).css( "color", "red" );
                 }).mouseleave(function() {
                 $( this ).css( "color", "black" );
                 });
             }//end of loop
-            startTimer();                    
+            startTimer();
+            $(".answer").each(function(){
+                console.log(this);
+            });
+
+
         }
         
 
