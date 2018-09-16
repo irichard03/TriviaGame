@@ -55,16 +55,18 @@ $(document).ready(function(){
             for(var y = 0; y <= 3; y++){
                 $( `.answer${y}` ).text(x.allAnswers[y]);
                 if(x.allAnswers[y] === x.correctAnswer){
-                    //$( `.answer${y}` ).attr("hint","RIGHT");
+                
                     $( `.answer${y}` ).click(function(y){
-                        alert("Correct!")
+                        
+                        stopTimer();
+
                     });
                 }                
                 else{
                     $( `.answer${y}` ).click(function(y){
                         alert("InCorrect!")
                     }); 
-                    //$( `.answer${y}` ).attr("hint","WRONG");
+                    
                 }
                 $( `.answer${y}` ).mouseenter(function() {
                 $( this ).css( "color", "red" );
@@ -102,6 +104,11 @@ $(document).ready(function(){
             clock = 10;
             player = 4;
             controller = setInterval(countDown,1000);
+        }
+
+        function stopTimer(){
+            clearInterval(controller);
+
         }
 
     //Construct trivia game.
