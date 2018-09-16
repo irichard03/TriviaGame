@@ -1,8 +1,22 @@
 h1 {
-    background-color: goldenrod;
+    background-color: red;
 }
 
 img {
     height: 300px;
     width: 400px;
+}
+
+body {
+    background-color: black;
+}
+
+.question,.answer {
+    color: white;
+    text-align: center;
+}
+
+.timer {
+    color: red;
+    text-align: center;
 }

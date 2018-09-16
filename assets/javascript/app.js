@@ -19,6 +19,7 @@ $(document).ready(function(){
         }
         var controller;    
         var clock;
+        var step = 0;
         
 
         //Declare a game object and initialize it with default valuse.  It defines the questions, answers, and wrong answers.
@@ -37,95 +38,102 @@ $(document).ready(function(){
         var question3 = new Game( "Which television series has Bruce Cambell not appeared on?", "Star Trek The Next Generation", ["X-Files","Fargo","Xena","Burn Notice"] );
         var question4 = new Game( "Complete the phrase: Klaatu, Barada, ", "Nikto", ["Necktie","Nickel","Noodle","Nectar"] );
         var question5 =  new Game( "What was the character name of the Bruce Campbell's re-ocurring role on Hercules?", "Autolycus", ["Thesues","Heroditus","Shemp","Polyphemus"] );
-        var quizArray = [question1, question2, question3, question4, question5];
+        var question6 =  new Game( "What was the character name of the Bruce Campbell's re-ocurring role on Hercules?", "Autolycus", ["Thesues","Heroditus","Shemp","Polyphemus"] );
+        var quizArray = [question1, question2, question3, question4, question5,question6];
 
         
         drawQuestion(quizArray[myTriviaGame.numQuestions-1]);
-
+        //Fills the Question Div with the question from game object.
         function drawQuestion(x){
             $(".question").text(x.question);
             for(var y = 0; y <= 3; y++){
                 $( `#answer${y}` ).text(x.allAnswers[y]);
                 if(x.allAnswers[y] === x.correctAnswer){
-                    $(`#answer${y}`).attr("hint","RIGHT");
-                    /** 
-                    $( `.answer${y}` ).click(function(){        //code executed on right response
-                        stopTimer();
-                        myTriviaGame.numQuestions--;
-                        if(myTriviaGame.numQuestions === 0){
-                            alert("Game over");
-                        }
-                        else{                                  
-                            myTriviaGame.numQuestions--;
-                            setTimeout(function(){
-                                drawQuestion(quizArray[myTriviaGame.numQuestions-1]);
-                              },3000)
-                        }                           
-                    });
-                    */
+                    $(`#answer${y}`).attr("hint","RIGHT");  //adds an attribute so I can find div with right answer for click
                 }                
                 else{
-                    $(`#answer${y}`).attr("hint","WRONG");
-                    /**
-                        $( `.answer${y}` ).click(function(){       //code executed on incorrect response
-                        myTriviaGame.numQuestions--;
-                        if(myTriviaGame.numQuestions === 0){
-                            alert("Game over");
-                        }
-                        else{
-                            setTimeout(function(){
-                                drawQuestion(quizArray[myTriviaGame.numQuestions-1]);
-                            },3000)
-                            stopTimer();                            
-                        }
-                    }); 
-                    */
+                    $(`#answer${y}`).attr("hint","WRONG");  //adds an attribute so I can find div with wrong answer for click
                 }
-                $( `#answer${y}` ).mouseenter(function() {
-                $( this ).css( "color", "red" );
+                $( `#answer${y}` ).mouseenter(function() {  //mouseover to show what is highlighted.
+                    $( this ).css( "color", "red" );
+                    $( this ).css( "font-weight", "bold" );
                 }).mouseleave(function() {
-                $( this ).css( "color", "black" );
+                    $( this ).css( "color", "white" );
+                    $( this ).css( "font-weight", "normal" );
                 });
             }//end of loop
+            
             startTimer();
-            $(".answer").each(function(){
-                console.log(this);
-            });
-
-
-        }
-        
-
-        function countDown(){
-            if(clock === 0){
-                clearInterval(controller);
-                $(".timer").text("Time's up!");
-                myTriviaGame.numQuestions--;
-                if(myTriviaGame.numQuestions === 0){
+            
+            $(".answer[hint='RIGHT']").click(function(){        //code executed on right response
+                    stopTimer();
+                if(step === 5){
+                    myTriviaGame.rightAnswers++;
                     alert("Game over");
+                    
                 }
-                else{
+                else{                                  
+                    stopTimer();
+                    myTriviaGame.rightAnswers++;
+                    myTriviaGame.numQuestions--;
                     setTimeout(function(){
                         drawQuestion(quizArray[myTriviaGame.numQuestions-1]);
                     },3000)
+                        
+                }                           
+            });
+
+            $(".answer[hint='WRONG']").click(function(){       //code executed on incorrect response
+                stopTimer();
+                if(step === 5){
+                    myTriviaGame.wrongAnswers++;
+                    alert("Game over");
                 }
+                else{
+                    stopTimer();
+                    myTriviaGame.wrongAnswers++;
+                    myTriviaGame.numQuestions--;
+                    $("#displayMe").empty
+                    setTimeout(function(){
+                        drawQuestion(quizArray[myTriviaGame.numQuestions-1]);
+                    },3000)
+                                                    
+                    }
+            }); 
+            
+
+
+        }
+
+        function countDown(){
+            
+
+            if((clock === 0) && (step === 5)){
+                clearInterval(controller);
+                $(".timer").text("Time's up!");
+                alert("Game over");
+                    
+            }else if(clock === 0){
+                clearInterval(controller);
+                myTriviaGame.numQuestions--;
+                setTimeout(function(){
+                    drawQuestion(quizArray[myTriviaGame.numQuestions-1])
+                },3000);
             }
-            else{
+            
             $(".timer").text(clock);
             clock--;
-            //console.log(clock);
-            }
+    
         }
 
         function startTimer(){
             clock = 10;
-            player = 4;
-            controller = setInterval(countDown,500);
+            step++;
+            controller = setInterval(countDown,1000);
         }
 
         function stopTimer(){
             clearInterval(controller);
-
         }
 
     //Construct trivia game.
