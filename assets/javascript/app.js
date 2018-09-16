@@ -31,43 +31,26 @@ $(document).ready(function(){
                 id : "default"
         }
                 
-        var myTriviaGame = new TriviaGame(5,0,0);
-        var questionOne; 
-        var questionTwo; 
-        var questionThree; 
-        var QuestionFour = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
-        var QuestionFive = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
+        var myTriviaGame = new TriviaGame(6,0,0);
+        var questionOne = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
+        var questionTwo = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
+        var questionThree = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
+        var questionFour = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
+        var questionFive =  new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
 
         
-            pickQuestion();
-       
-
-
-        function pickQuestion(){
-            
-            switch(myTriviaGame.numQuestions) {
-                case 5:
-                    questionOne = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
-                    drawQuestion(questionOne);
-                    break;
-                case 4:
-                    questionTwo = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
-                    drawQuestion(questionTwo);
-                    break;
-                case 3:
-                    questionThree = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
-                    drawQuestion(questionThree);
-                    break;
-                case 2:
-                    questionFour = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
-                    drawQuestion(questionFour);
-                    break;
-                case 2:
-                    questionFive = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
-                    draQuestion(questionFive);
-                    break;
-            }
+        drawQuestion(questionOne);
+        drawQuestion(questionTwo);
+        drawQuestion(questionThree);
+        drawQuestion(questionFour);
+        drawQuestion(questionFive);
+         
+        
+        
+        function getAnswer(){
+            alert("TODOTHIS");
         }
+       
 
         function drawQuestion(x){
             $(".question").text(x.question);
@@ -76,7 +59,6 @@ $(document).ready(function(){
                 console.log(y);
                 console.log(x.allAnswers[y]);
             }
-            
                     
         }
         
