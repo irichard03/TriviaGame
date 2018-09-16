@@ -40,22 +40,30 @@ $(document).ready(function(){
 
         
         drawQuestion(questionOne);
-        drawQuestion(questionTwo);
-        drawQuestion(questionThree);
-        drawQuestion(questionFour);
-        drawQuestion(questionFive);
+        getAnswer();
+        
          
         
         
         function getAnswer(){
-            alert("TODOTHIS");
+            
         }
        
 
         function drawQuestion(x){
             $(".question").text(x.question);
             for(var y = 0; y <= 3; y++){
-                $(`.answer${y}`).text(x.allAnswers[y]);
+                $( `.answer${y}` ).text(x.allAnswers[y]);
+                $( `.answer${y}` ).mouseenter(function() {
+                $( this ).css( "color", "red" );
+                }).mouseleave(function() {
+                $( this ).css( "color", "black" );
+                });
+
+
+                $(`.answer${y}`).click(function(){
+                    alert("I work");
+                });
                 console.log(y);
                 console.log(x.allAnswers[y]);
             }
