@@ -55,10 +55,16 @@ $(document).ready(function(){
             for(var y = 0; y <= 3; y++){
                 $( `.answer${y}` ).text(x.allAnswers[y]);
                 if(x.allAnswers[y] === x.correctAnswer){
-                    $( `.answer${y}` ).attr("hint","RIGHT");
+                    //$( `.answer${y}` ).attr("hint","RIGHT");
+                    $( `.answer${y}` ).click(function(y){
+                        alert("Correct!")
+                    });
                 }                
                 else{
-                     $( `.answer${y}` ).attr("hint","WRONG");
+                    $( `.answer${y}` ).click(function(y){
+                        alert("InCorrect!")
+                    }); 
+                    //$( `.answer${y}` ).attr("hint","WRONG");
                 }
                 $( `.answer${y}` ).mouseenter(function() {
                 $( this ).css( "color", "red" );
@@ -67,10 +73,9 @@ $(document).ready(function(){
                 });
 
 
-                $( `.answer${y}` ).click(function(){
-                   
-                   
-                });
+                
+
+                 
 
             }
             startTimer();
@@ -83,7 +88,7 @@ $(document).ready(function(){
                 clearInterval(controller);
                 $(".timer").text("Time's up!");
                 setTimeout(function(){
-                    alert("Blaah!");            //call next
+                  //  alert("Blaah!");            //call next
                 },3000)
             }
             else{
