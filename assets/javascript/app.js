@@ -31,24 +31,16 @@ $(document).ready(function(){
                 id : "default"
         }
                 
-        var myTriviaGame = new TriviaGame(6,0,0);
-        var questionOne = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
-        var questionTwo = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
-        var questionThree = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
-        var questionFour = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
-        var questionFive =  new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
+        var myTriviaGame = new TriviaGame(5,0,0);
+        var question1 = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
+        var question2= new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
+        var question3 = new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
+        var question4 = new Game( "Which movie was Bruce Campbell not in?", "Terminator", ["Army of Darkness","Spiderman","Evil Dead","Bubbahotep"] );
+        var question5 =  new Game( "How many fingers am I holding up?", "One", ["Two","Three","Four","Five"] );
+        var quizArray = [question1, question2, question3, question4, question5];
 
         
-        drawQuestion(questionOne);
-        getAnswer();
-        
-         
-        
-        
-        function getAnswer(){
-            
-        }
-       
+        drawQuestion(quizArray[myTriviaGame.numQuestions-1]);
 
         function drawQuestion(x){
             $(".question").text(x.question);
@@ -56,15 +48,20 @@ $(document).ready(function(){
                 $( `.answer${y}` ).text(x.allAnswers[y]);
                 if(x.allAnswers[y] === x.correctAnswer){
                 
-                    $( `.answer${y}` ).click(function(y){
-                        
+                    $( `.answer${y}` ).click(function(y){        //code executed on right response
                         stopTimer();
-
+                        myTriviaGame.numQuestions--;
+                        if(myTriviaGame.numQuestions === 0){
+                            alert("Game over");
+                        }
+                        else{                                  
+                            drawQuestion(quizArray[myTriviaGame.numQuestions]);    //otherwise draw next question
+                        }                           
                     });
                 }                
                 else{
-                    $( `.answer${y}` ).click(function(y){
-                        alert("InCorrect!")
+                    $( `.answer${y}` ).click(function(y){       //code executed on incorrect response
+                        stopTimer();                            
                     }); 
                     
                 }
@@ -73,15 +70,8 @@ $(document).ready(function(){
                 }).mouseleave(function() {
                 $( this ).css( "color", "black" );
                 });
-
-
-                
-
-                 
-
             }
-            startTimer();
-                    
+            startTimer();                    
         }
         
 
