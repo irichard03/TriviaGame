@@ -54,6 +54,12 @@ $(document).ready(function(){
             $(".question").text(x.question);
             for(var y = 0; y <= 3; y++){
                 $( `.answer${y}` ).text(x.allAnswers[y]);
+                if(x.allAnswers[y] === x.correctAnswer){
+                    $( `.answer${y}` ).attr("hint","RIGHT");
+                }                
+                else{
+                     $( `.answer${y}` ).attr("hint","WRONG");
+                }
                 $( `.answer${y}` ).mouseenter(function() {
                 $( this ).css( "color", "red" );
                 }).mouseleave(function() {
@@ -61,12 +67,13 @@ $(document).ready(function(){
                 });
 
 
-                $(`.answer${y}`).click(function(){
-                    alert("I work");
+                $( `.answer${y}` ).click(function(){
+                   
+                   
                 });
-                console.log(y);
-                console.log(x.allAnswers[y]);
+
             }
+            startTimer();
                     
         }
         
