@@ -147,21 +147,14 @@ $(document).ready(function(){
             else{
                 $(".timer").text(clock);
                 clock--;
-                if(clock <= 0){
-                    clearInterval(controller);
-                    step++;
-                    setTimeout(function(){
-                        drawQuestion(quizArray[step])       //wait three seconds then display next answer.
-                    },3000);
-                }
+                
             }
     
         }
 
         function startTimer(){
             clock = 10;
-            step++;
-            controller = setInterval(countDown,250);
+            controller = setInterval(countDown,1000);
         }
 
         function stopTimer(){
